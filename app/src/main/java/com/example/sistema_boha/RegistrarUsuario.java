@@ -32,7 +32,6 @@ public class RegistrarUsuario extends AppCompatActivity {
     EditText nombre, apellido, direccion, correo, numero, clave;
     Button botonRegistrar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +48,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         correo = findViewById(R.id.txtEmail);
         numero = findViewById(R.id.txtNumCelular);
         clave = findViewById(R.id.txtClave);
-        botonRegistrar = findViewById(R.id.btnRegistrar);
+        botonRegistrar = findViewById(R.id.btn_Registrar);
 
         botonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +60,7 @@ public class RegistrarUsuario extends AppCompatActivity {
 
     //metodo para registrar un usuario Cliente
     private void registrar(){
-        String url = "http://10.10.1.58/conexionbd/Insertar.php";
+        String url = "https://cesarob.000webhostapp.com/conexionbd/Insertar.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override

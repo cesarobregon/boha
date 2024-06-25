@@ -5,6 +5,182 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#181818"
     tools:context=".inicio">
+
+    <TextView
+        android:id="@+id/textView0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/combos"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnCombos"
+        app:layout_constraintStart_toStartOf="@+id/btnCombos"
+        app:layout_constraintTop_toBottomOf="@+id/btnCombos" />
+
+    <Button
+        android:id="@+id/btn_Inicio"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#DCBB3A"
+        android:text="@string/inicio"
+        android:textColor="#181818"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#DCBB3A"
+        android:text="@string/reservas"
+        android:textColor="#181818"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_Inicio" />
+
+    <Button
+        android:id="@+id/btnIngresar"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#DCBB3A"
+        android:text="@string/pedidos"
+        android:textColor="#181818"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnPerfilInicio" />
+
+    <Button
+        android:id="@+id/btnPerfilInicio"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#DCBB3A"
+        android:text="@string/perfil"
+        android:textColor="#181818"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnMenuLateral"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/menu_lateral"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/menu" />
+
+    <ImageView
+        android:id="@+id/imagenTitulo"
+        android:layout_width="128dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/btnMenuLateral"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/boha" />
+
+    <ImageView
+        android:id="@+id/imgInicioPrincipal"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/boha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagenTitulo"
+        app:srcCompat="@drawable/boha_inicio" />
+
+    <ImageButton
+        android:id="@+id/btnCombos"
+        android:layout_width="132dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/combos"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgInicioPrincipal"
+        app:srcCompat="@drawable/combos" />
+
+    <ImageButton
+        android:id="@+id/btnPromos"
+        android:layout_width="132dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:contentDescription="@string/promociones"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgInicioPrincipal"
+        app:srcCompat="@drawable/promos" />
+
+    <ImageButton
+        android:id="@+id/btnComidas"
+        android:layout_width="132dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
+        android:contentDescription="@string/comidas"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        app:srcCompat="@drawable/comidas" />
+
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/promociones"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnPromos"
+        app:layout_constraintStart_toStartOf="@+id/btnPromos"
+        app:layout_constraintTop_toBottomOf="@+id/btnPromos" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/comidas"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnComidas"
+        app:layout_constraintStart_toStartOf="@+id/btnComidas"
+        app:layout_constraintTop_toBottomOf="@+id/btnComidas" />
+
+    <ImageButton
+        android:id="@+id/btnViandas"
+        android:layout_width="132dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/viandas"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView0"
+        app:srcCompat="@drawable/viandas" />
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/viandas"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnViandas"
+        app:layout_constraintStart_toStartOf="@+id/btnViandas"
+        app:layout_constraintTop_toBottomOf="@+id/btnViandas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

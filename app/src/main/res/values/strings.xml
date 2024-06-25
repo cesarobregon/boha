@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Sistema_Boha</string>
+    <string name="ha_olvidado_su_contrase_a">Ha Olvidado su Contraseña?</string>
+    <string name="boha">Boha</string>
+    <string name="correo_electr_nico">Correo Electrónico</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="google">Google</string>
+    <string name="iniciar_sesion">Iniciar Sesion</string>
+    <string name="no_tienes_una_cuenta">No tienes una Cuenta?</string>
+    <string name="o_iniciar_sesion_con">O Iniciar Sesion con:</string>
+    <string name="o_registrarse_con">O Registrarse Con:</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="numero_de_tel_fono">Numero de Teléfono</string>
+    <string name="registrar_usuario">Registrar Usuario</string>
+    <string name="ingrese_los_datos_del_usuario">Ingrese los Datos del Usuario</string>
+    <string name="direccion">Direccion</string>
+    <string name="combos">Combos</string>
+    <string name="inicio">Inicio</string>
+    <string name="reservas">Reservas</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="perfil">Perfil</string>
+    <string name="menu_lateral">Menu Lateral</string>
+    <string name="promociones">Promociones</string>
+    <string name="comidas">Comidas</string>
+    <string name="viandas">Viandas</string>
 </resources>
