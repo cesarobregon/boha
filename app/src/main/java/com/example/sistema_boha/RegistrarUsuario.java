@@ -53,13 +53,17 @@ public class RegistrarUsuario extends AppCompatActivity {
         botonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registrar();
+                if (camposVacios()){
+                    Toast.makeText(RegistrarUsuario.this, "Falta Rellenar algunos campos", Toast.LENGTH_SHORT).show();
+                }else {
+                    registrarUsuario();
+                }
             }
         });
     }
 
     //metodo para registrar un usuario Cliente
-    private void registrar(){
+    private void registrarUsuario(){
         String url = "https://cesarob.000webhostapp.com/conexionbd/Insertar.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -73,7 +77,6 @@ public class RegistrarUsuario extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Toast.makeText(RegistrarUsuario.this, "Error al Registrar", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Ocurrió una excepción: " + volleyError.getMessage(), volleyError);
             }
         }){
             @Override
@@ -89,6 +92,15 @@ public class RegistrarUsuario extends AppCompatActivity {
             }
         };
         requestQueue.add(sr);
+    }
+
+    private boolean camposVacios(){
+        boolean isEmpty = false;
+        if (nombre.getText().toString().isEmpty() | apellido.getText().toString().isEmpty() | direccion.getText().toString().isEmpty() |
+        correo.getText().toString().isEmpty() | numero.getText().toString().isEmpty() | clave.getText().toString().isEmpty()){
+            isEmpty = true;
+        }
+        return isEmpty;
     }
 
 

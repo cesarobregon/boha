@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
 
     EditText email, clave;
 
-    Button registrar, ingresar;
+    Button registrar, ingresar, recuperarClave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +46,26 @@ public class Login extends AppCompatActivity {
         clave = findViewById(R.id.txtClave);
         ingresar = findViewById(R.id.btnIngresar);
         registrar = findViewById(R.id.btn_Registrar);
+        recuperarClave = findViewById(R.id.btnRecuperarClave);
+
+        recuperarClave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, recuperarClave.class);
+                startActivity(intent);
+            }
+        });
 
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailUsuario = email.getText().toString();
-                String claveUsuario = clave.getText().toString();
-                buscarUsuario(emailUsuario, claveUsuario);
+                if (camposVacios()){
+                    Toast.makeText(Login.this, "Falta rellenar algunos campos", Toast.LENGTH_SHORT).show();
+                }else {
+                    String emailUsuario = email.getText().toString();
+                    String claveUsuario = clave.getText().toString();
+                    validarUsuario(emailUsuario, claveUsuario);
+                }
             }
         });
 
@@ -65,7 +78,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private void buscarUsuario(String email, String clave){
+    private void validarUsuario(String email, String clave){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "https://cesarob.000webhostapp.com/conexionbd/Registro.php?email=" + email + "&clave=" + clave;
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -94,5 +107,13 @@ public class Login extends AppCompatActivity {
     private void registrarse(){
         finish();
         startActivity(new Intent(Login.this, RegistrarUsuario.class));
+    }
+
+    private boolean camposVacios(){
+        boolean isEmpty = false;
+        if (email.getText().toString().isEmpty() | clave.getText().toString().isEmpty()){
+            isEmpty = true;
+        }
+        return isEmpty;
     }
 }

@@ -8,22 +8,11 @@
     android:background="#181818"
     tools:context=".Login">
 
-    <TextView
-        android:id="@+id/recuperar_clave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/ha_olvidado_su_contrase_a"
-        android:textColor="#DCBB3A"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtClave" />
-
     <ImageView
         android:id="@+id/imagen_principal"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="80dp"
         android:contentDescription="@string/boha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,20 +53,16 @@
 
     <Button
         android:id="@+id/btnIngresar"
-        android:layout_width="320dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#DCBB3A"
         android:text="@string/ingresar"
         android:textColor="#181818"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recuperar_clave" />
+        app:layout_constraintEnd_toEndOf="@+id/txtClave"
+        app:layout_constraintTop_toBottomOf="@+id/txtClave" />
 
     <Button
         android:id="@+id/btn_Registrar"
@@ -89,25 +74,12 @@
         android:backgroundTint="#DCBB3A"
         android:text="@string/registrarse"
         android:textColor="#181818"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-    <ImageButton
-        android:id="@+id/btnPromos"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_social"
-        android:contentDescription="@string/google"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:srcCompat="@drawable/google1" />
 
     <TextView
         android:id="@+id/txtIniciarSesion"
@@ -124,19 +96,6 @@
         app:layout_constraintTop_toBottomOf="@+id/imagen_principal" />
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/o_iniciar_sesion_con"
-        android:textColor="#DCBB3A"
-        android:textColorLink="#DCBB3A"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
-
-    <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -146,5 +105,16 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPromos" />
+        app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
+
+    <Button
+        android:id="@+id/btnRecuperarClave"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#565555"
+        android:text="Olvide mi Contraseña"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/txtClave"
+        app:layout_constraintTop_toBottomOf="@+id/txtClave" />
 </androidx.constraintlayout.widget.ConstraintLayout>
