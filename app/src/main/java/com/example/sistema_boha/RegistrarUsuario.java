@@ -1,5 +1,6 @@
 package com.example.sistema_boha;
 
+
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
@@ -64,7 +65,7 @@ public class RegistrarUsuario extends AppCompatActivity {
 
     //metodo para registrar un usuario Cliente
     private void registrarUsuario(){
-        String url = "https://cesarob.000webhostapp.com/conexionbd/Insertar.php";
+        String url = "https://10.10.1.61/conexionbd/Registrar.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -77,6 +78,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Toast.makeText(RegistrarUsuario.this, "Error al Registrar", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onErrorResponse: " + volleyError.getMessage());
             }
         }){
             @Override

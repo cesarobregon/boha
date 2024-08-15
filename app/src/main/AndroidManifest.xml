@@ -16,6 +16,33 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".bottomNavigationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_bottom_navigation" />
+        <activity
+            android:name=".activity.MenuLateralInicio"
+            android:exported="false"
+            android:label="@string/title_activity_menu_inicio"
+            android:theme="@style/Theme.Sistema_Boha.NoActionBar" />
+        <activity
+            android:name=".Carrito"
+            android:exported="false" />
+        <activity
+            android:name=".Reservas"
+            android:exported="false" />
+        <activity
+            android:name=".Bebidas"
+            android:exported="false" />
+        <activity
+            android:name=".Promociones"
+            android:exported="false" />
+        <activity
+            android:name=".Viandas"
+            android:exported="false" />
+        <activity
+            android:name=".Comidas"
+            android:exported="false" />
+        <activity
             android:name=".recuperarClave"
             android:exported="false" />
         <activity
@@ -25,7 +52,7 @@
             android:name=".perfilUsuario"
             android:exported="false" />
         <activity
-            android:name=".inicio"
+            android:name=".Inicio"
             android:exported="false" />
         <activity
             android:name=".Login"

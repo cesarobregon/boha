@@ -29,7 +29,6 @@ import org.json.JSONObject;
 public class Login extends AppCompatActivity {
 
     EditText email, clave;
-
     Button registrar, ingresar, recuperarClave;
 
     @Override
@@ -59,13 +58,15 @@ public class Login extends AppCompatActivity {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (camposVacios()){
+                Intent intent = new Intent(Login.this, Inicio.class);
+                startActivity(intent);
+                /*if (camposVacios()){
                     Toast.makeText(Login.this, "Falta rellenar algunos campos", Toast.LENGTH_SHORT).show();
                 }else {
                     String emailUsuario = email.getText().toString();
                     String claveUsuario = clave.getText().toString();
                     validarUsuario(emailUsuario, claveUsuario);
-                }
+                }*/
             }
         });
 
@@ -80,12 +81,12 @@ public class Login extends AppCompatActivity {
 
     private void validarUsuario(String email, String clave){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "https://cesarob.000webhostapp.com/conexionbd/Registro.php?email=" + email + "&clave=" + clave;
+        String url = "https://10.10.1.61/conexionbd/Validar.php?email=" + email + "&clave=" + clave;
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 try {
-                    Intent intent = new Intent(Login.this, inicio.class);
+                    Intent intent = new Intent(Login.this, Inicio.class);
                     String id = jsonObject.getString("id_cliente");
                     intent.putExtra("id_cliente", id);
                     startActivity(intent);
