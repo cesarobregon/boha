@@ -65,7 +65,7 @@ public class RegistrarUsuario extends AppCompatActivity {
 
     //metodo para registrar un usuario Cliente
     private void registrarUsuario(){
-        String url = "https://10.10.1.61/conexionbd/Registrar.php";
+        String url = "http://10.10.1.51/conexionbd/Registrar.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override

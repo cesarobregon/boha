@@ -29,7 +29,7 @@ import org.json.JSONObject;
 public class Login extends AppCompatActivity {
 
     EditText email, clave;
-    Button registrar, ingresar, recuperarClave;
+    Button registrar, ingresar, ingresar2, recuperarClave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.txtEmail);
         clave = findViewById(R.id.txtClave);
         ingresar = findViewById(R.id.btnIngresar);
+        ingresar2 = findViewById(R.id.btnIngreso2);
         registrar = findViewById(R.id.btn_Registrar);
         recuperarClave = findViewById(R.id.btnRecuperarClave);
 
@@ -58,15 +59,21 @@ public class Login extends AppCompatActivity {
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Inicio.class);
-                startActivity(intent);
-                /*if (camposVacios()){
+                if (camposVacios()){
                     Toast.makeText(Login.this, "Falta rellenar algunos campos", Toast.LENGTH_SHORT).show();
                 }else {
                     String emailUsuario = email.getText().toString();
                     String claveUsuario = clave.getText().toString();
                     validarUsuario(emailUsuario, claveUsuario);
-                }*/
+                }
+            }
+        });
+
+        ingresar2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, InicioActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -81,12 +88,12 @@ public class Login extends AppCompatActivity {
 
     private void validarUsuario(String email, String clave){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "https://10.10.1.61/conexionbd/Validar.php?email=" + email + "&clave=" + clave;
+        String url = "http://10.10.1.51/conexionbd/Validar.php?email=" + email + "&clave=" + clave;
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 try {
-                    Intent intent = new Intent(Login.this, Inicio.class);
+                    Intent intent = new Intent(Login.this, InicioActivity.class);
                     String id = jsonObject.getString("id_cliente");
                     intent.putExtra("id_cliente", id);
                     startActivity(intent);
@@ -106,8 +113,8 @@ public class Login extends AppCompatActivity {
     }
 
     private void registrarse(){
-        finish();
-        startActivity(new Intent(Login.this, RegistrarUsuario.class));
+        Intent intent = new Intent(Login.this, RegistrarUsuario.class);
+        startActivity(intent);
     }
 
     private boolean camposVacios(){

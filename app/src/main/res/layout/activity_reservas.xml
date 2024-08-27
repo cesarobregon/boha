@@ -5,6 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#181818"
     tools:context=".Reservas">
+    <!-- Incluir el toolbar común -->
+    <include layout="@layout/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

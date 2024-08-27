@@ -47,7 +47,8 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.volley)
 
-    implementation ("com.facebook.stetho:stetho:1.5.1")
-    implementation ("com.facebook.stetho:stetho-okhttp3:1.5.1")
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+
 
 }
