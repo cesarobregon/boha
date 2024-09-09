@@ -16,6 +16,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".NuevaClaveCliente"
+            android:exported="false" />
+        <activity
+            android:name=".nuevaClave"
+            android:exported="false" />
+        <activity
+            android:name=".codigoRecuperacion"
+            android:exported="false" />
+        <activity
+            android:name=".editarDatosUsuario"
+            android:exported="false" />
+        <activity
             android:name=".InicioActivity"
             android:exported="false" />
         <activity
@@ -43,9 +55,6 @@
             android:exported="false" />
         <activity
             android:name=".recuperarClave"
-            android:exported="false" />
-        <activity
-            android:name=".editarDatosUsuario"
             android:exported="false" />
         <activity
             android:name=".perfilUsuario"

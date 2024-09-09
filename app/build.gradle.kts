@@ -46,7 +46,6 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.volley)
-
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
 

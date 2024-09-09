@@ -15,7 +15,7 @@ import android.widget.ImageButton;
  * create an instance of this fragment.
  */
 public class InicioFragment extends Fragment {
-    ImageButton comidas, viandas, promos, bebidas, reservas;
+    ImageButton comidas, bebidas, reservas;
     Intent intent;
 
     public InicioFragment() {
@@ -34,8 +34,6 @@ public class InicioFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_inicio, container, false);
 
         comidas = view.findViewById(R.id.btn_Comidas);
-        viandas = view.findViewById(R.id.btn_Viandas);
-        promos = view.findViewById(R.id.btn_Promos);
         bebidas = view.findViewById(R.id.btn_Bebidas);
         reservas = view.findViewById(R.id.btn_Reservas);
 
@@ -43,20 +41,6 @@ public class InicioFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getActivity(), Comidas.class);
-                startActivity(intent);
-            }
-        });
-        viandas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getActivity(), Viandas.class);
-                startActivity(intent);
-            }
-        });
-        promos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getActivity(), Promociones.class);
                 startActivity(intent);
             }
         });

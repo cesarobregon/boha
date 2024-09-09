@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -15,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Random;
 
 public class recuperarClave extends AppCompatActivity {
-    EditText correo;
+    EditText correoCliente;
     Button btncodigo;
 
     Random num = new Random();
@@ -30,8 +29,7 @@ public class recuperarClave extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        correo = findViewById(R.id.txtCorreoRecuperacion);
-
+        correoCliente = findViewById(R.id.txtRecuperarCorreo);
         btncodigo = findViewById(R.id.btnEnviarCod);
 
         btncodigo.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +41,7 @@ public class recuperarClave extends AppCompatActivity {
         });
 
     }
+
 
 
 }
