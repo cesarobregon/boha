@@ -69,4 +69,33 @@ public class Cliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+
+    //metodos para validar cada atributo
+    public boolean nombreValido() {
+        return nombre != null && nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") && nombre.length() >= 2 && nombre.length() <= 40;
+    }
+    public boolean apellidoValido() {
+        return apellido != null && apellido.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") && apellido.length() >= 2 && apellido.length() <= 40;
+    }
+    public boolean correoValido() {
+        return email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.length() <= 60;
+    }
+    public boolean claveValida() {
+        return clave != null && clave.length() >= 8 && clave.length() <= 30
+                && clave.matches(".*[A-Z].*") && clave.matches(".*[a-z].*")
+                && clave.matches(".*[0-9].*");
+    }
+    public boolean direccionValida() {
+        return direccion != null && !direccion.trim().isEmpty() && direccion.length() >= 5 && direccion.length() <= 100;
+    }
+    public boolean telefonoValido() {
+        return telefono != null && telefono.matches("[0-9+]{7,30}");
+    }
+
+    // Método general para validar todos los campos
+    public boolean clienteValido() {
+        return nombreValido() && apellidoValido() && correoValido() && claveValida()
+                && direccionValida() && telefonoValido();
+    }
 }

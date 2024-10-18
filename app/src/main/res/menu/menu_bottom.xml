@@ -5,9 +5,13 @@
         android:icon="@drawable/icono_inicio"
         android:title="Inicio" />
     <item
-        android:id="@+id/page_carrito"
+        android:id="@+id/page_pedidos"
         android:icon="@drawable/icono_carrito"
-        android:title="Carrito" />
+        android:title="Pedidos" />
+    <item
+        android:id="@+id/page_reservas"
+        android:icon="@drawable/icono_inicio"
+        android:title="Reservas" />
     <item
         android:id="@+id/page_perfil"
         android:icon="@drawable/icono_perfil"

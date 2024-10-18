@@ -1,7 +1,6 @@
 package com.example.sistema_boha;
 
 import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +21,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,6 +28,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.sistema_boha.conexion.conexion;
+import com.example.sistema_boha.entidades.Cliente;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +38,10 @@ public class editarDatosUsuario extends AppCompatActivity {
 
     Button btn_guardar;
     private Toolbar toolbar;
+    String direccion = conexion.direccion;
     int id;
+
+    Cliente cliente = new Cliente();
     EditText txtNombre, txtApellido, txtEmail, txtDireccion, txtTelefono, txtClave;
 
     @Override
@@ -76,7 +77,11 @@ public class editarDatosUsuario extends AppCompatActivity {
         btn_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                guardar();
+                if (!controlCampos()){  //si el control de campos devuelve false se muestra el siguiente mensaje
+                    Toast.makeText(editarDatosUsuario.this, "Error Al Registrar, Campos Incorrectos", Toast.LENGTH_SHORT).show();
+                }else {  //si el control devuelve true, se ejecuta el metodo buscarEmail()
+                    editarDatosCliente();
+                }
             }
         });
 
@@ -117,8 +122,8 @@ public class editarDatosUsuario extends AppCompatActivity {
         //java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
 
     }
-    private void guardar(){
-        String url = "http://192.168.10.127/conexionbd/Editar.php";
+    private void editarDatosCliente(){
+        String url = "http://"+direccion+"/conexionbd/Editar.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -151,4 +156,40 @@ public class editarDatosUsuario extends AppCompatActivity {
         };
         requestQueue.add(sr);
     }
+
+    private boolean controlCampos(){
+        boolean valido = false;
+        cliente.setNombre(txtNombre.getText().toString());
+        cliente.setApellido(txtApellido.getText().toString());
+        cliente.setDireccion(txtDireccion.getText().toString());
+        cliente.setEmail(txtEmail.getText().toString());
+        cliente.setTelefono(txtTelefono.getText().toString());
+        cliente.setClave(txtClave.getText().toString());
+        if(cliente.clienteValido()){
+            valido = true; // Los datos son válidos, proceder con la lógica de registro
+        }else {
+            // Mostrar mensaje de error específico
+            if (!cliente.nombreValido()) {
+                txtNombre.setError("Nombre inválido. Se permiten solamente letras mayusculas y minusculas");
+            }
+            if (!cliente.apellidoValido()) {
+                txtApellido.setError("Apellido inválido. Se permiten solamente letras mayusculas y minusculas");
+            }
+            if (!cliente.correoValido()) {
+                txtEmail.setError("Email inválido");
+            }
+            if (!cliente.claveValida()) {
+                txtClave.setError("Contraseña inválida, Se permiten solamente Mayusculas, Minusculas y Números");
+            }
+            if (!cliente.direccionValida()) {
+                txtDireccion.setError("Dirección inválida");
+            }
+            if (!cliente.telefonoValido()) {
+                txtTelefono.setError("Número inválido");
+            }
+        }
+        return valido;
+    }
+
+
 }

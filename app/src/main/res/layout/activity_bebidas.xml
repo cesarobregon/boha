@@ -9,5 +9,16 @@
     tools:context=".Bebidas">
     <!-- Incluir el toolbar común -->
     <include layout="@layout/toolbar" />
+
+    <!-- RecyclerView para mostrar los productos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewBebidas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+    </androidx.recyclerview.widget.RecyclerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

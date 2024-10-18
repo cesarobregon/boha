@@ -1,6 +1,5 @@
 package com.example.sistema_boha;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -15,7 +14,7 @@ import android.widget.ImageButton;
  * create an instance of this fragment.
  */
 public class InicioFragment extends Fragment {
-    ImageButton comidas, bebidas, reservas;
+    ImageButton comidas, bebidas;
     Intent intent;
 
     public InicioFragment() {
@@ -35,7 +34,7 @@ public class InicioFragment extends Fragment {
 
         comidas = view.findViewById(R.id.btn_Comidas);
         bebidas = view.findViewById(R.id.btn_Bebidas);
-        reservas = view.findViewById(R.id.btn_Reservas);
+
 
         comidas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,13 +47,6 @@ public class InicioFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getActivity(), Bebidas.class);
-                startActivity(intent);
-            }
-        });
-        reservas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getActivity(), Reservas.class);
                 startActivity(intent);
             }
         });

@@ -6,78 +6,80 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#181818"
-    tools:context=".Reservas">
+    tools:context=".editarReserva">
+
     <!-- Incluir el toolbar común -->
     <include layout="@layout/toolbar" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
-        android:text="Seleccionar Fecha"
+        android:text="Cambiar Fecha"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txtCantidadSillas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:hint="Cantidad de Sillas"
-        android:inputType="number"
-        android:textColorHint="#5EFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMotivoReserva" />
-
-    <Button
-        android:id="@+id/btnAgregarReserva"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#DCBB3A"
-        android:text="Agregar al Carrito"
-        android:textColor="#181818"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCantidadSillas" />
-
     <CalendarView
-        android:id="@+id/calendarioReserva"
+        android:id="@+id/calendarioReservaEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <Button
+        android:id="@+id/btnHoraReservaEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#565555"
+        android:text="Cambiar Hora"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarioReservaEditar" />
 
     <EditText
-        android:id="@+id/txtMotivoReserva"
+        android:id="@+id/txtMotivoReservaEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:ems="10"
         android:hint="Motivo de la Reserva"
         android:inputType="text"
         android:textColorHint="#5EFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHoraReserva" />
+        app:layout_constraintTop_toBottomOf="@+id/btnHoraReservaEditar" />
 
-    <Button
-        android:id="@+id/btnHoraReserva"
+    <EditText
+        android:id="@+id/txtCantidadSillasEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#565555"
-        android:text="Seleccionar Hora"
-        android:textColor="@color/white"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Cantidad de Sillas"
+        android:inputType="text"
+        android:textColorHint="#5EFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarioReserva" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMotivoReservaEditar" />
+
+    <Button
+        android:id="@+id/btnGuardarCambiosReserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#DCBB3A"
+        android:text="Guardar Cambios"
+        android:textColor="#181818"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCantidadSillasEditar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

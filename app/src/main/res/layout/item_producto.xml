@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <!-- Imagen del producto con un tamaño fijo de 120dp x 120dp -->
+    <ImageView
+        android:id="@+id/imageViewProducto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/boha_inicio" />
+
+    <!-- Layout contenedor para el nombre y el precio -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Producto"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio del Producto"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Botones "Añadir al carrito" y "Ver descripción" -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#565555"
+            android:text="Ver Descripcion"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnAnadirAlCarrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#DCBB3A"
+            android:text="Añadir al Carrito"
+            android:textColor="#181818" />
+    </LinearLayout>
+</LinearLayout>
