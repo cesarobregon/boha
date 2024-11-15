@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 public class InicioFragment extends Fragment {
     ImageButton comidas, bebidas;
     Intent intent;
+    CarritoManager carritoManager;
 
     public InicioFragment() {
     }
@@ -39,7 +40,7 @@ public class InicioFragment extends Fragment {
         comidas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(getActivity(), Comidas.class);
+                intent = new Intent(getActivity(), ComidasCategorias.class);
                 startActivity(intent);
             }
         });

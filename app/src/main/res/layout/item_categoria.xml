@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:gravity="center_vertical">
+
+    <!-- Imagen del producto -->
+    <ImageView
+        android:id="@+id/imageViewCategoria"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/boha_inicio" />
+
+    <!-- Nombre de la categoría -->
+    <TextView
+        android:id="@+id/textViewNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nombre de la Categoria"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Botón "Ver Productos" -->
+    <Button
+        android:id="@+id/btnVerProductos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#565555"
+        android:text="Ver Productos"
+        android:textColor="@color/white" />
+
+</LinearLayout>

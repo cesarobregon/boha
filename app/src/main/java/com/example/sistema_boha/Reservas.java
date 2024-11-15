@@ -59,7 +59,6 @@ public class Reservas extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
         id_cliente = sharedPreferences.getInt("id_cliente", -1);
 
-
         // Inicializa los elementos visuales en activity_reservas.xml
         calendarView = findViewById(R.id.calendarioReserva);
         editTextCantidad = findViewById(R.id.txtCantidadSillas);

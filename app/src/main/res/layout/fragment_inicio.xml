@@ -16,7 +16,7 @@
             android:id="@+id/imageView"
             android:layout_width="230dp"
             android:layout_height="200dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:src="@drawable/boha_inicio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +25,9 @@
 
         <ImageButton
             android:id="@+id/btn_Comidas"
-            android:layout_width="270dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="60dp"
+            android:layout_width="300dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="50dp"
             android:backgroundTint="#181818"
             android:contentDescription="imgComidas"
             android:scaleType="fitXY"
@@ -49,8 +49,8 @@
 
         <ImageButton
             android:id="@+id/btn_Bebidas"
-            android:layout_width="270dp"
-            android:layout_height="120dp"
+            android:layout_width="300dp"
+            android:layout_height="140dp"
             android:layout_marginTop="32dp"
             android:backgroundTint="#181818"
             android:contentDescription="imgBebidas"

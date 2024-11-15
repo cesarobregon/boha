@@ -1,9 +1,23 @@
 <androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#DCBB3A"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:titleTextColor="#181818"/>
+    app:titleTextColor="#181818"
+    tools:ignore="ExtraText">
+
+    <!-- Botón en el lado derecho -->
+    <ImageView
+        android:id="@+id/btnCarritoToolbar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/carro" />
+
+</androidx.appcompat.widget.Toolbar>

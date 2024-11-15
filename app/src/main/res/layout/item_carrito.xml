@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:padding="12dp">
 
-    <!-- Imagen del producto con un tamaño fijo de 120dp x 120dp -->
+    <!-- Imagen del producto con un tamaño fijo de 100dp x 100dp -->
     <ImageView
         android:id="@+id/imageViewProducto"
         android:layout_width="100dp"
@@ -40,7 +40,7 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- Botones "Añadir al carrito" y "Ver descripción" -->
+    <!-- Botones "Eliminar" y "Agregar Otro" -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,19 +48,20 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnVerDescripcion"
+            android:id="@+id/buttonEliminar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#565555"
-            android:text="Ver Descripcion"
-            android:textColor="@color/white" />
+            android:backgroundTint="#CD0000"
+            android:text="Eliminar"
+            android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/btnAnadirAlCarrito"
+            android:id="@+id/buttonAgregarOtro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#DCBB3A"
-            android:text="Añadir al Carrito"
-            android:textColor="#181818" />
+            android:backgroundTint="#009205"
+            android:text="Agregar Otro"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>
+
