@@ -13,11 +13,12 @@ public class Producto {
     private String precio;
     private String disponibilidad;
     private String id_categoria;
+    private int cantidad;
 
     //constructores de la clase
 
     public Producto(String id, String nombre, String descripcion, String foto, String precio,
-                    String disponibilidad, String id_categoria) {
+                    String disponibilidad, String id_categoria, int cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -25,6 +26,7 @@ public class Producto {
         this.precio = precio;
         this.disponibilidad = disponibilidad;
         this.id_categoria = id_categoria;
+        this.cantidad = 1;
     }
 
     public Producto() {
@@ -35,6 +37,7 @@ public class Producto {
         this.precio = "";
         this.disponibilidad = "";
         this.id_categoria = "";
+        this.cantidad = 1;
     }
 
     // Constructor que toma un JSONObject
@@ -46,6 +49,10 @@ public class Producto {
         this.precio = jsonObject.getString("precio");
         this.disponibilidad = jsonObject.getString("disponibilidad");
         this.id_categoria = jsonObject.getString("id_categoria");
+        this.cantidad = 1;
+    }
+
+    public Producto(String productoA, int i, double v) {
     }
 
     //metodos para obtener o modificar los valores de los atributos
@@ -71,9 +78,14 @@ public class Producto {
     public String getFoto() {
         return foto;
     }
-
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+    public int getCantidad() {
+        return cantidad;
+    }
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
     public String getPrecio() {
         return precio;

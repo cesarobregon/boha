@@ -20,6 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
 
     public CarritoManager carritoManager;
@@ -30,6 +32,9 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         this.context = context;
         this.productos = productos;
         this.carritoManager = carritoManager;
+    }
+
+    public ProductoAdapter(List<Producto> productos) {
     }
 
     @NonNull
@@ -66,7 +71,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
                 @Override
                 public void onClick(View v) {
                     carritoManager.agregarProducto(producto); // Llama al método de instancia
-                    Toast.makeText(context, producto.getNombre() + "Añadido al Carrito", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, producto.getNombre() + " añadido al Carrito", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -85,7 +90,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
 
     @Override
     public int getItemCount() {
-        return productos.length();
+        return productos != null ? productos.length() : 0;
     }
 
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {

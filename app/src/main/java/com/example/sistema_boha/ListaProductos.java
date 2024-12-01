@@ -58,7 +58,7 @@ public class ListaProductos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Código para abrir el carrito, por ejemplo, iniciar una nueva actividad
-                Intent intent = new Intent(ListaProductos.this, CarroCompras.class);
+                Intent intent = new Intent(ListaProductos.this, CarritoActivity.class);
                 startActivity(intent);
             }
         });

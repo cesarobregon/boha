@@ -61,4 +61,14 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
             buttonEliminar = itemView.findViewById(R.id.buttonEliminar);
         }
     }
+
+    public void setProductos(List<Producto> carrito){
+        if (carrito == null){
+            Producto producto = new Producto();
+            carrito.add(producto);
+        }else {
+            productos = carrito;
+        }
+
+    }
 }

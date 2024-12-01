@@ -20,6 +20,10 @@ public class CarritoManager {
         return instance;
     }
 
+    public void setCarrito(List<Producto> productosPedido){
+        productos = productosPedido;
+    }
+
     public void agregarProducto(Producto producto) {
         productos.add(producto);
     }

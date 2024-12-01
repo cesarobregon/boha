@@ -14,8 +14,8 @@
         tools:layout="@layout/fragment_reservas"/>
 
     <fragment android:id="@+id/page_pedidos"
-        android:name="com.example.sistema_boha.CarritoFragment"
-        tools:layout="@layout/fragment_carrito"/>
+        android:name="com.example.sistema_boha.PedidosFragment"
+        tools:layout="@layout/fragment_pedidos"/>
 
     <fragment android:id="@+id/page_perfil"
         android:name="com.example.sistema_boha.PerfilFragment"

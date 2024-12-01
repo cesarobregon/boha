@@ -149,7 +149,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     //metodo que verifica en la base de datos si el correo ingresado por el usuario
     // ya esta registrado, en caso de que no este, se ejecuta el metodo registrarUsuario()
     private void buscarEmail() {
-        String url = "http://10.10.1.54/conexionbd/BuscarCorreo.php";
+        String url = "http://"+direccionip+"/conexionbd/BuscarCorreo.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
