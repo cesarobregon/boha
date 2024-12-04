@@ -68,13 +68,11 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
         String id;
         TextView textViewNombre;
-        ImageView imageViewProducto;
         Button btnVerProductos;
 
         public CategoriaViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewNombre = itemView.findViewById(R.id.textViewNombre);
-            imageViewProducto = itemView.findViewById(R.id.imageViewCategoria);
             btnVerProductos = itemView.findViewById(R.id.btnVerProductos);
         }
     }

@@ -1,6 +1,5 @@
 package com.example.sistema_boha;
 
-import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -160,6 +159,7 @@ public class PagoActivity extends AppCompatActivity {
             pedido.setEstadoPago("Pagado");
         }else {
             pedido.setId_metodo(4);
+            pedido.setFechaPago(obtenerFechaActual());
             pedido.setEstadoPago("Pendiente");
         }
         pedido.setMontoTotal(calcularTotalCarrito());
@@ -193,6 +193,7 @@ public class PagoActivity extends AppCompatActivity {
                                 finish();
                             } else {
                                 Toast.makeText(PagoActivity.this, "Error al registrar el pedido", Toast.LENGTH_SHORT).show();
+                                Log.e("Error al Registrar", jsonObject.getString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -261,4 +262,6 @@ public class PagoActivity extends AppCompatActivity {
         SimpleDateFormat sdfFecha = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         return sdfFecha.format(new Date());
     }
+
+
 }

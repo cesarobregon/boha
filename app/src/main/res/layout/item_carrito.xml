@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:gravity="center_vertical">
 
     <!-- Imagen del producto con un tamaño fijo de 100dp x 100dp -->
     <ImageView
@@ -13,7 +14,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="16dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/boha_inicio" />
+        android:src="@drawable/img_notfound" />
 
     <!-- Layout contenedor para el nombre y el precio -->
     <LinearLayout
@@ -21,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/textViewNombre"
@@ -40,21 +42,13 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- Botones "Eliminar" y "Agregar Otro" -->
-    <LinearLayout
+    <!-- Botón de imagen "Eliminar" -->
+    <ImageButton
+        android:id="@+id/buttonEliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/buttonEliminar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#CD0000"
-            android:text="Eliminar"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop"
+        android:src="@android:drawable/ic_delete"
+        android:contentDescription="Eliminar" />
 </LinearLayout>
-

@@ -95,7 +95,7 @@ public class CarritoActivity extends AppCompatActivity {
         btnbebidas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CarritoActivity.this, Bebidas.class);
+                Intent intent = new Intent(CarritoActivity.this, BebidasCategorias.class);
                 startActivity(intent);
             }
         });
@@ -117,8 +117,7 @@ public class CarritoActivity extends AppCompatActivity {
             }
         });
 
-
-        // Inicializar la barra de herramientas (toolbar) y configurarla como ActionBar
+        // Inicializar la barra de herramientas y configurarla como ActionBar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Configurar el ActionBar con un botón de retroceso y el título

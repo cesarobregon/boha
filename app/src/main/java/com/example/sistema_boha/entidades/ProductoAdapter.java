@@ -11,11 +11,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide; // Necesario si decides usar Glide para cargar imágenes
+import android.graphics.drawable.Drawable;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+
 import com.example.sistema_boha.CarritoManager;
 import com.example.sistema_boha.R;
+import com.example.sistema_boha.conexion.conexion;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +36,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
 
     public CarritoManager carritoManager;
     private JSONArray productos;
+    String direccion = conexion.direccion;
     private Context context;
 
     public ProductoAdapter(Context context, JSONArray productos, CarritoManager carritoManager) {
@@ -58,13 +69,32 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             holder.textViewNombre.setText(producto.getNombre());
             holder.textViewPrecio.setText("Precio: $" + producto.getPrecio());
 
+
+            // URL de la imagen que deseas cargar
+            String imageUrl = "http://"+direccion+"/BOHAFINAL/" + producto.getFoto();
+
             // Cargar la imagen desde la URL si existe
-            if (!producto.getFoto().isEmpty()) {
-                Glide.with(context)
-                        .load(producto.getFoto())
-                        .placeholder(R.drawable.boha_inicio) // Usa una imagen por defecto en caso de error
-                        .into(holder.imageViewProducto);
-            }
+            Glide.with(context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.img_notfound) // Imagen mientras se carga
+                    .error(R.drawable.img_notfound) // Imagen de error en caso de fallo
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            // Log del error
+                            if (e != null) {
+                                e.logRootCauses("GlideError");
+                            }
+                            return false; // Devuelve false para permitir que Glide maneje el error
+                        }
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            // Imagen cargada correctamente
+                            return false;
+                        }
+                    })
+                    .into(holder.imageViewProducto);
+
 
             // Configurar el botón "Añadir al Carrito"
             holder.buttonAnadirCarrito.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +126,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNombre, textViewPrecio;
         ImageView imageViewProducto;
+        // Dirección IP del servidor
+        String direccion = conexion.direccion;
         Button buttonAnadirCarrito, buttonVerDescripcion;
 
         public ProductoViewHolder(@NonNull View itemView) {

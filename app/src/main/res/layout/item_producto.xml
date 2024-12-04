@@ -13,7 +13,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="16dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/boha_inicio" />
+        android:src="@drawable/img_notfound" />
 
     <!-- Layout contenedor para el nombre y el precio -->
     <LinearLayout

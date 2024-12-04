@@ -47,7 +47,7 @@ public class InicioFragment extends Fragment {
         bebidas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(getActivity(), Bebidas.class);
+                intent = new Intent(getActivity(), BebidasCategorias.class);
                 startActivity(intent);
             }
         });

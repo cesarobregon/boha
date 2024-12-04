@@ -1,10 +1,11 @@
 package com.example.sistema_boha;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +31,7 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
         return new CarritoViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CarritoViewHolder holder, int position) {
         Producto producto = productos.get(position);
@@ -52,7 +54,7 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
 
     public static class CarritoViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNombre, textViewPrecio;
-        Button buttonEliminar;
+        ImageButton buttonEliminar;
 
         public CarritoViewHolder(@NonNull View itemView) {
             super(itemView);

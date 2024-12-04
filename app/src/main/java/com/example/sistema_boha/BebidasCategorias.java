@@ -26,7 +26,7 @@ import com.example.sistema_boha.entidades.CategoriaAdapter;
 
 import org.json.JSONArray;
 
-public class Bebidas extends AppCompatActivity {
+public class BebidasCategorias extends AppCompatActivity {
 
     //barra de herramientas
     private Toolbar toolbar;
@@ -35,7 +35,7 @@ public class Bebidas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_bebidas);
+        setContentView(R.layout.activity_bebidas_categorias);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -85,9 +85,9 @@ public class Bebidas extends AppCompatActivity {
             public void onResponse(JSONArray response) {
                 // Inicializar el RecyclerView
                 RecyclerView recyclerView = findViewById(R.id.recyclerViewBebidas);
-                recyclerView.setLayoutManager(new LinearLayoutManager(Bebidas.this));
+                recyclerView.setLayoutManager(new LinearLayoutManager(BebidasCategorias.this));
                 // Crear el adaptador y asignarlo al RecyclerView
-                CategoriaAdapter adapter = new CategoriaAdapter(Bebidas.this, response);
+                CategoriaAdapter adapter = new CategoriaAdapter(BebidasCategorias.this, response);
                 recyclerView.setAdapter(adapter);
             }
         }, new Response.ErrorListener() {

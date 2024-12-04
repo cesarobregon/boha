@@ -56,7 +56,7 @@
             android:name=".Reservas"
             android:exported="false" />
         <activity
-            android:name=".Bebidas"
+            android:name=".BebidasCategorias"
             android:exported="false" />
         <activity
             android:name=".Promociones"
