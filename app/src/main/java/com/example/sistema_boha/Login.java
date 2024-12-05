@@ -104,11 +104,13 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<JSONObject>() { // Listener que maneja la respuesta exitosa
             @Override
             public void onResponse(JSONObject jsonObject) {
+
+                //desencriptar la clave recibida para comparar con la ingresada por el usuario
                 String ClaveBD;
-                //desencriptar la clave
+
                 try {
-                    // Generar la clave secreta
-                    secretKey = CryptoUtils.generateKey();
+                    // Obtener la clave fija
+                    SecretKey secretKey = CryptoUtils.getFixedKey();
 
                     // Desencriptar el valor
                     String encryptedText = jsonObject.getString("clave");
@@ -127,10 +129,12 @@ public class Login extends AppCompatActivity {
                         guardarDatosUsuario(jsonObject); // Guardar los datos del usuario en SharedPreferences
                         startActivity(intent);
                         finish();  // Cerrar la actividad de login para no volver al hacer back
+                    }else {
+                        // Mostrar mensaje si las credenciales son incorrectas
+                        Toast.makeText(Login.this, "Email o Contraseña incorrectos", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
-                    // Mostrar mensaje si las credenciales son incorrectas
-                    Toast.makeText(Login.this, "Email o Contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() { // Listener que maneja errores en la petición

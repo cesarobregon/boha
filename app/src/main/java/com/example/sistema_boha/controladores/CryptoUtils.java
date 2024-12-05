@@ -12,11 +12,13 @@ public class CryptoUtils {
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES";
 
-    // Método para generar una clave secreta
-    public static SecretKey generateKey() throws NoSuchAlgorithmException {
-        KeyGenerator keyGen = KeyGenerator.getInstance(ALGORITHM);
-        keyGen.init(256); // Para AES-256
-        return keyGen.generateKey();
+    // Define una clave fija en base64 (por ejemplo, una clave de 256 bits para AES)
+    private static final String FIXED_KEY = "0123456789abcdef0123456789abcdef";
+
+    // Método para obtener la clave fija
+    public static SecretKey getFixedKey() {
+        byte[] decodedKey = FIXED_KEY.getBytes();
+        return new SecretKeySpec(decodedKey, 0, decodedKey.length, ALGORITHM);
     }
 
     // Método para encriptar el texto

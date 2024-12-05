@@ -123,26 +123,25 @@ public class RegistrarUsuario extends AppCompatActivity {
         cliente.setDireccion(direccion.getText().toString());
         cliente.setEmail(correo.getText().toString());
         cliente.setTelefono(numero.getText().toString());
-        //encriptar la clave
-        try {
-            // Generar la clave secreta
-            secretKey = CryptoUtils.generateKey();
+        cliente.setClave(clave.getText().toString());
 
-            // Encriptar un valor
-            String originalText = clave.getText().toString();
-            String encryptedText = CryptoUtils.encrypt(originalText, secretKey);
-            Log.e("Clave Encriptada", "Texto Encriptado: " + encryptedText);
-            cliente.setClave(encryptedText);
-
-            // Desencriptar el valor
-//            String decryptedText = CryptoUtils.decrypt(encryptedText, secretKey);
-//            Log.e("Clave Desencriptada", "Texto Desencriptado: " + decryptedText);
-        } catch (Exception e) {
-            e.printStackTrace();
-            cliente.setClave(clave.getText().toString());
-        }
         if(cliente.clienteValido()){
             valido = true; // Los datos son válidos, proceder con la lógica de registro
+
+            //encriptar la clave
+            try {
+                // Obtener la clave fija
+                SecretKey secretKey = CryptoUtils.getFixedKey();
+
+                // Encriptar un valor
+                String originalText = clave.getText().toString();
+                String encryptedText = CryptoUtils.encrypt(originalText, secretKey);
+                Log.e("Clave Encriptada", "Texto Encriptado: " + encryptedText);
+                cliente.setClave(encryptedText);
+            } catch (Exception e) {
+                e.printStackTrace();
+                cliente.setClave(clave.getText().toString());
+            }
         }else {
             // Mostrar mensaje de error específico
             if (!cliente.nombreValido()) {

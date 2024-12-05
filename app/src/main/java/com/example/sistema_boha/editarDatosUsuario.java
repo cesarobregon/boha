@@ -117,9 +117,8 @@ public class editarDatosUsuario extends AppCompatActivity {
         String ClaveDesencriptada;
         //desencriptar la clave
         try {
-            // Generar la clave secreta
-            secretKey = CryptoUtils.generateKey();
-
+            // Obtener la clave fija
+            SecretKey secretKey = CryptoUtils.getFixedKey();
             // Desencriptar el valor
             String decryptedText = CryptoUtils.decrypt(clave, secretKey);
             Log.e("Clave Desencriptada", "Texto Desencriptado: " + decryptedText);
@@ -136,10 +135,6 @@ public class editarDatosUsuario extends AppCompatActivity {
         txtDireccion.setText(direccion);
         txtTelefono.setText(telefono);
         txtClave.setText(ClaveDesencriptada);
-
-        //solucionar error
-        //java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
-
     }
     private void editarDatosCliente(){
         String url = "http://"+direccion+"/conexionbd/Editar.php";
@@ -183,24 +178,22 @@ public class editarDatosUsuario extends AppCompatActivity {
         cliente.setDireccion(txtDireccion.getText().toString());
         cliente.setEmail(txtEmail.getText().toString());
         cliente.setTelefono(txtTelefono.getText().toString());
-
-        //encriptar la clave
-        try {
-            // Generar la clave secreta
-            secretKey = CryptoUtils.generateKey();
-
-            // Encriptar un valor
-            String originalText = txtClave.getText().toString();
-            String encryptedText = CryptoUtils.encrypt(originalText, secretKey);
-            Log.e("Clave Encriptada", "Texto Encriptado: " + encryptedText);
-            cliente.setClave(encryptedText);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            cliente.setClave(txtClave.getText().toString());
-        }
+        cliente.setClave(txtClave.getText().toString());
         if(cliente.clienteValido()){
             valido = true; // Los datos son válidos, proceder con la lógica de registro
+            //encriptar la clave
+            try {
+                // Obtener la clave fija
+                SecretKey secretKey = CryptoUtils.getFixedKey();
+                // Encriptar un valor
+                String originalText = txtClave.getText().toString();
+                String encryptedText = CryptoUtils.encrypt(originalText, secretKey);
+                Log.e("Clave Encriptada", "Texto Encriptado: " + encryptedText);
+                cliente.setClave(encryptedText);
+            } catch (Exception e) {
+                e.printStackTrace();
+                cliente.setClave(txtClave.getText().toString());
+            }
         }else {
             // Mostrar mensaje de error específico
             if (!cliente.nombreValido()) {
@@ -224,6 +217,4 @@ public class editarDatosUsuario extends AppCompatActivity {
         }
         return valido;
     }
-
-
 }
