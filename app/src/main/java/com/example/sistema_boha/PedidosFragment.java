@@ -65,7 +65,7 @@ public class PedidosFragment extends Fragment {
 
     //Botones y texto de la vista del pedido
     private Button btnVerCarro, btnConfirmar, btnCancelar;
-    TextView infoPedido;
+    TextView infoPedido, txtUltimosPedidos;
 
     public PedidosFragment() {
         // Required empty public constructorz
@@ -95,6 +95,7 @@ public class PedidosFragment extends Fragment {
         btnConfirmar = view.findViewById(R.id.btnConfirmarPedido);
         btnCancelar = view.findViewById(R.id.btnCancelarPedido);
         infoPedido = view.findViewById(R.id.txtInfoPedido);
+        txtUltimosPedidos = view.findViewById(R.id.txtUltimosPedidos);
 
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,6 +184,7 @@ public class PedidosFragment extends Fragment {
 
                                 // Datos del pedido
                                 String uuidPedido = pedidoJson.getString("uuid_pedido");
+
                                 String fecha = pedidoJson.getString("fecha");
                                 String estado = pedidoJson.getString("estado");
                                 String hora = pedidoJson.getString("hora");
@@ -212,6 +214,9 @@ public class PedidosFragment extends Fragment {
                                 pedido.setMontoTotal(montoTotal);
                                 pedido.setProductos(productos);
                                 pedidos.add(pedido);
+                            }
+                            if (!pedidos.isEmpty()){
+                                txtUltimosPedidos.setVisibility(View.VISIBLE);
                             }
 
                             // Actualizar el RecyclerView con los pedidos obtenidos
@@ -263,7 +268,6 @@ public class PedidosFragment extends Fragment {
 
     private void configurarRecyclerView(List<Pedido> pedidos) {
         PedidoAdapter pedidoAdapter = new PedidoAdapter(pedidos);
-
         RecyclerView recyclerPedidos = requireView().findViewById(R.id.recyclerPedidos);
         recyclerPedidos.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerPedidos.setAdapter(pedidoAdapter);

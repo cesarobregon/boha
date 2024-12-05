@@ -18,11 +18,13 @@
         app:layout_constraintBottom_toTopOf="@+id/seccionListadoPedidos">
 
         <!-- Botón para ver el carrito -->
-        yyy<Button
+        yyy
+
+        <Button
             android:id="@+id/btnVerCarro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="64dp"
             android:backgroundTint="#DCBB3A"
             android:text="Ver Productos en Carrito"
             android:textColor="@color/appColor"
@@ -77,24 +79,24 @@
         android:id="@+id/seccionListadoPedidos"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/seccionPedido"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seccionPedido">
 
         <!-- Título del listado -->
         <TextView
-            android:id="@+id/txtTituloPedidos"
+            android:id="@+id/txtUltimosPedidos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Últimos Pedidos"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- RecyclerView para mostrar el listado -->
         <androidx.recyclerview.widget.RecyclerView
@@ -102,11 +104,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="80dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtTituloPedidos" />
+            app:layout_constraintTop_toBottomOf="@id/txtUltimosPedidos" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

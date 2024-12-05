@@ -30,14 +30,17 @@ import com.example.sistema_boha.conexion.conexion;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Reservas extends AppCompatActivity {
+public class ReservarMesa extends AppCompatActivity {
 
     // Variables para los elementos de la interfaz
     String direccion = conexion.direccion;
-    Button btnAgregar , btnHora;
+    Button btnAgregar, btnHora;
     private Toolbar toolbar;
     CalendarView calendarView;
     EditText editTextCantidad, editTextMotivo;
@@ -68,11 +71,10 @@ public class Reservas extends AppCompatActivity {
 
         // Configurar el TimePickerDialog para que el usuario pueda cambiar la hora
         btnHora.setOnClickListener(v -> {
-
             // Abrir el TimePickerDialog con la hora actual del botón
-            @SuppressLint("SetTextI18n") TimePickerDialog timePickerDialog = new TimePickerDialog(Reservas.this, (view, hourOfDay, minute) -> {
+            @SuppressLint("SetTextI18n") TimePickerDialog timePickerDialog = new TimePickerDialog(ReservarMesa.this, (view, hourOfDay, minute) -> {
                 // Almacenar la nueva hora seleccionada
-                horaSeleccionada = hourOfDay + ":" + minute;
+                horaSeleccionada = hourOfDay + ":" + (minute < 10 ? "0" + minute : minute);
 
                 // Actualizar el texto del botón con la nueva hora
                 btnHora.setText("Hora: " + horaSeleccionada);
@@ -90,7 +92,7 @@ public class Reservas extends AppCompatActivity {
             }
         });
 
-        //se intenta registrar la reserva
+        // se intenta registrar la reserva
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,46 +129,71 @@ public class Reservas extends AppCompatActivity {
     // Función para registrar la reserva
     private void registrarReserva() {
         // URL del api php donde se realiza la solicitud POST
-        String url = "http://"+direccion+"/conexionbd/Reservar.php";
+        String url = "http://" + direccion + "/conexionbd/Reservar.php";
 
         // Obténemos los valores de los EditText
         String cantidadPersonas = editTextCantidad.getText().toString();
         String motivo = editTextMotivo.getText().toString();
+
+        //  Controles de los Campos
 
         // Verificamos que no haya campos vacíos
         if (cantidadPersonas.isEmpty() || motivo.isEmpty() || fechaSeleccionada == null || horaSeleccionada == null) {
             Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
+        // Verificación de cantidad de personas
+        if (Integer.parseInt(cantidadPersonas) > 15) {
+            Toast.makeText(this, "Se pueden Reservar como máximo 15 Sillas", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Verificación de fecha
+        Calendar fechaActual = Calendar.getInstance();
+        fechaActual.add(Calendar.DAY_OF_YEAR, 1); // Añadir un día para obtener el día siguiente
+        Calendar fechaSeleccionadaCal = Calendar.getInstance();
+        String[] partesFecha = fechaSeleccionada.split("-");
+        fechaSeleccionadaCal.set(Integer.parseInt(partesFecha[0]), Integer.parseInt(partesFecha[1]) - 1, Integer.parseInt(partesFecha[2]));
+        if (fechaSeleccionadaCal.before(fechaActual)) {
+            Toast.makeText(this, "Fecha Incorrecta", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Verificación de hora
+        String[] partesHora = horaSeleccionada.split(":");
+        int hora = Integer.parseInt(partesHora[0]);
+        int minuto = Integer.parseInt(partesHora[1]);
+        if (hora < 8 || (hora >= 23 && minuto > 0)) {
+            Toast.makeText(this, "La hora debe estar entre las 08:00 y las 23:00", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Crear un StringRequest para realizar una solicitud POST al servidor
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // se recibe un objeto json desde el servidor con la informacion del registro en la base de datos
-                        try {
-                            // Convertir la respuesta en un objeto JSON
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
-                            if (success) {
-                                //en caso de ser exitoso el registro, se finaliza el activity y se redirige al usuario al inicio
-                                Toast.makeText(Reservas.this, "Reserva registrada exitosamente", Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(Reservas.this, InicioActivity.class));
-                            } else {
-                                Toast.makeText(Reservas.this, "Error al registrar la reserva", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            // Si hay un error en la respuesta JSON, se muestra un mensaje de error
-                            e.printStackTrace();
-                            Toast.makeText(Reservas.this, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show();
-                        }
+            @Override
+            public void onResponse(String response) {
+                // se recibe un objeto json desde el servidor con la informacion del registro en la base de datos
+                try {
+                    // Convertir la respuesta en un objeto JSON
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean success = jsonObject.getBoolean("success");
+                    if (success) {
+                        // en caso de ser exitoso el registro, se finaliza el activity y se redirige al usuario al inicio
+                        Toast.makeText(ReservarMesa.this, "Reserva registrada exitosamente", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(ReservarMesa.this, InicioActivity.class));
+                    } else {
+                        Toast.makeText(ReservarMesa.this, "Error al registrar la reserva", Toast.LENGTH_SHORT).show();
                     }
-                }, new Response.ErrorListener() {
+                } catch (JSONException e) {
+                    // Si hay un error en la respuesta JSON, se muestra un mensaje de error
+                    e.printStackTrace();
+                    Toast.makeText(ReservarMesa.this, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // Manejar errores de la solicitud, como problemas de red
-                Toast.makeText(Reservas.this, "Error al conectar con el servidor", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReservarMesa.this, "Error al conectar con el servidor", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -181,7 +208,7 @@ public class Reservas extends AppCompatActivity {
                 return params;
             }
         };
-        // Añadimo la solicitud a la RequestQueue (se coloca la solicitud en la cola para que se envíe)
+        // Añadimos la solicitud a la RequestQueue (se coloca la solicitud en la cola para que se envíe)
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }

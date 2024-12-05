@@ -25,17 +25,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/txtTituloInfoReserva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
             android:text="Informacion de su Reserva"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/txtAgregarReserva" />
 
         <Button
             android:id="@+id/btnEditarReserva"
@@ -45,10 +45,11 @@
             android:backgroundTint="#565555"
             android:text="Modificar Reserva"
             android:textColor="@color/white"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtInfoReservaCarrito" />
+            app:layout_constraintTop_toBottomOf="@+id/txtInfoReserva" />
 
         <Button
             android:id="@+id/btnCancelarReserva"
@@ -58,23 +59,24 @@
             android:backgroundTint="#DCBB3A"
             android:text="Cancelar Reserva"
             android:textColor="#181818"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnEditarReserva" />
 
         <TextView
-            android:id="@+id/txtInfoReservaCarrito"
+            android:id="@+id/txtInfoReserva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Aun no has Reservado una Mesa"
+            android:text="Aún no has Reservado una Mesa"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            app:layout_constraintTop_toBottomOf="@+id/txtTituloInfoReserva" />
 
         <ImageButton
             android:id="@+id/btn_Reserva"
@@ -90,12 +92,12 @@
             app:srcCompat="@drawable/reservas22" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/txtAgregarReserva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="Agregar Reserva"
             android:textColor="#FFFFFF"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_Reserva" />

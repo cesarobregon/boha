@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#181818"
-    tools:context=".Reservas">
+    tools:context=".ReservarMesa">
     <!-- Incluir el toolbar común -->
     <include layout="@layout/toolbar" />
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:backgroundTint="#DCBB3A"
-        android:text="Agregar al Carrito"
+        android:text="Registrar Reserva"
         android:textColor="#181818"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -53,7 +53,7 @@
             android:label="@string/title_activity_inicio_principal"
             android:theme="@style/Theme.Sistema_Boha.NoActionBar" />
         <activity
-            android:name=".Reservas"
+            android:name=".ReservarMesa"
             android:exported="false" />
         <activity
             android:name=".BebidasCategorias"

@@ -217,7 +217,7 @@ public class PagoActivity extends AppCompatActivity {
                 params.put("fecha", pedido.getFechaPedido());
                 params.put("hora", pedido.getHora());
                 params.put("tipo_entrega", pedido.getTipoEntrega());
-                params.put("estado", "EN PROCESO");
+                params.put("estado", "PENDIENTE");
                 params.put("modificado", String.valueOf(pedido.getModificado()));
                 params.put("id_pago", String.valueOf(pedido.getId_pago()));
                 params.put("id_metodo", String.valueOf(pedido.getId_metodo()));
@@ -262,6 +262,4 @@ public class PagoActivity extends AppCompatActivity {
         SimpleDateFormat sdfFecha = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         return sdfFecha.format(new Date());
     }
-
-
 }

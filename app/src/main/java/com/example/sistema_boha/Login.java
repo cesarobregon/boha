@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity {
 
     // se definen los elementos de la interfaz
     EditText email, clave;
-    Button registrar, ingresar, ingresar2, recuperarClave;
+    Button registrar, ingresar, recuperarClave;
 
     // Dirección IP del servidor
     String direccion = conexion.direccion;
@@ -49,7 +49,6 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.txtEmail);
         clave = findViewById(R.id.txtClave);
         ingresar = findViewById(R.id.btnIngresar);
-        ingresar2 = findViewById(R.id.btnIngreso2);
         registrar = findViewById(R.id.btn_Registrar);
         recuperarClave = findViewById(R.id.btnRecuperarClave);
 
@@ -57,8 +56,9 @@ public class Login extends AppCompatActivity {
         recuperarClave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, recuperarClave.class);
-                startActivity(intent);
+//                Intent intent = new Intent(Login.this, recuperarClave.class);
+//                startActivity(intent);
+                Toast.makeText(Login.this, "Funcion en Desarrollo", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -76,15 +76,6 @@ public class Login extends AppCompatActivity {
                     String claveUsuario = clave.getText().toString();
                     validarUsuario(emailUsuario, claveUsuario);
                 }
-            }
-        });
-
-        // segundo botón "Ingreso2" para navegar directamente a la actividad principal
-        ingresar2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, InicioActivity.class);
-                startActivity(intent);
             }
         });
 

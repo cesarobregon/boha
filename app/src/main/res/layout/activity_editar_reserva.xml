@@ -57,19 +57,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnHoraReservaEditar" />
 
-    <EditText
-        android:id="@+id/txtCantidadSillasEditar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Cantidad de Sillas"
-        android:inputType="text"
-        android:textColorHint="#5EFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMotivoReservaEditar" />
-
     <Button
         android:id="@+id/btnGuardarCambiosReserva"
         android:layout_width="wrap_content"
@@ -81,5 +68,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCantidadSillasEditar" />
+
+    <EditText
+        android:id="@+id/txtCantidadSillasEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Cantidad de Sillas"
+        android:inputType="number"
+        android:textColorHint="#5EFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMotivoReservaEditar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

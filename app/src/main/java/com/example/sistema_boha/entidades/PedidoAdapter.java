@@ -3,8 +3,10 @@ package com.example.sistema_boha.entidades;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,7 +181,19 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
             if (diferenciaMinutos > 5) {
                 Toast.makeText(context, "El pedido ya no se puede cancelar.", Toast.LENGTH_SHORT).show();
             } else {
-                cancelarPedido(context, pedido.getUuidPedido());//se envia el uuid del pedido para cancelar
+                // Crear un AlertDialog para mostrar la confirmación de la cancelación
+                new AlertDialog.Builder(context)
+                        .setTitle("Cancelar Pedido")
+                        .setMessage("¿Estás seguro de que deseas cancelar el Pedido?")
+                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Llamar al método que enviará la cancelación al servidor
+                                cancelarPedido(context, pedido.getUuidPedido());//se envia el uuid del pedido para cancelar
+                            }
+                        })
+                        .setNegativeButton("No", null) // Si elige "No", simplemente cierra el diálogo
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -202,9 +216,10 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
                             boolean success = jsonObject.getBoolean("success");
                             if (success) {
                                 Toast.makeText(context, "Pedido cancelado exitosamente", Toast.LENGTH_SHORT).show();
+                                Log.e("Mensaje del Servidor", jsonObject.getString("message"));
                             } else {
-                                String message = jsonObject.has("message") ? jsonObject.getString("message") : "Error desconocido";
-                                Toast.makeText(context, "Error al cancelar el pedido: " + message, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Error al cancelar el pedido: ", Toast.LENGTH_SHORT).show();
+                                Log.e("Mensaje del Servidor", jsonObject.getString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -227,11 +242,9 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
                 return params;
             }
         };
-
         // Añadir la solicitud a la RequestQueue
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
-
 }
 

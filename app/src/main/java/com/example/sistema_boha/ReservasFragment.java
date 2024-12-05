@@ -34,7 +34,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,9 +49,8 @@ public class ReservasFragment extends Fragment {
 
     Button btn_editarReserva, btn_eliminarReserva;
     ImageButton reservas;
-
-    TextView txtInfoReserva;
-    String id_reserva = "", id_cliente, fecha, hora, cantidad, motivo;
+    TextView txtInfoReserva, txtTituloInfoReserva, txtNuevaReserva;
+    String id_reserva = "", id_cliente, fecha, estado, hora, cantidad, motivo;
 
     JSONObject reserva;
 
@@ -69,20 +67,22 @@ public class ReservasFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @SuppressLint("WrongViewCast")
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservas, container, false);
 
         reservas = view.findViewById(R.id.btn_Reserva);
-        txtInfoReserva = view.findViewById(R.id.txtInfoReservaCarrito);
+        txtInfoReserva = view.findViewById(R.id.txtInfoReserva);
+        txtTituloInfoReserva = view.findViewById(R.id.txtTituloInfoReserva);
+        txtNuevaReserva = view.findViewById(R.id.txtAgregarReserva);
         btn_editarReserva = view.findViewById(R.id.btnEditarReserva);
         btn_eliminarReserva = view.findViewById(R.id.btnCancelarReserva);
 
         reservas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(getActivity(), Reservas.class);
+                intent = new Intent(getActivity(), ReservarMesa.class);
                 startActivity(intent);
             }
         });
@@ -136,17 +136,25 @@ public class ReservasFragment extends Fragment {
                             id_reserva = response.getString("id_reserva");
                             id_cliente = response.getString("id_cliente");
                             cantidad = response.getString("cantidad_personas");
+                            estado = response.getString("estado");
                             fecha = response.getString("fecha");
                             hora = response.getString("hora");
                             motivo = response.getString("motivo");
 
-                            txtInfoReserva.setText("Fecha: " + fecha +
+                            txtInfoReserva.setText("Estado de su Reserva: " + estado +
+                                    "\nFecha: " + fecha +
                                     "\nHora: " + hora +
                                     "\nCantidad de Personas: " + cantidad +
                                     "\nMotivo de la Reserva: " + motivo);
 
+                            reservas.setVisibility(View.INVISIBLE);
+                            txtNuevaReserva.setVisibility(View.INVISIBLE);
+                            txtTituloInfoReserva.setVisibility(View.VISIBLE);
+                            btn_editarReserva.setVisibility(View.VISIBLE);
+                            btn_eliminarReserva.setVisibility(View.VISIBLE);
+
                         } catch (JSONException e) {
-                            Log.e(TAG, "Sin Reservas");
+                            Log.e("No se Recibieron Reservas", "Sin Reservas");
                             // si se produce un JSONException significa que el cliente no tiene reservas
                         }
                     }
@@ -176,7 +184,7 @@ public class ReservasFragment extends Fragment {
 
 
         if(primeraClave.equals("mensaje")){
-            Toast.makeText(requireContext(), "Todavia No has Reservado una Mesa", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Aún no has Reservado una Mesa", Toast.LENGTH_SHORT).show();
         }else {
             // Redirigir a editarReserva
             Intent intent = new Intent(requireActivity(), editarReserva.class);
@@ -199,7 +207,7 @@ public class ReservasFragment extends Fragment {
             primeraClave = clave.next();
         }
         if(primeraClave.equals("mensaje")){
-            Toast.makeText(requireContext(), "Todavia no has Reservado una Mesa", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Aún no has Reservado una Mesa", Toast.LENGTH_SHORT).show();
         }else {
             // Crear un AlertDialog para mostrar la confirmación de la cancelación
             new AlertDialog.Builder(requireContext())
@@ -232,7 +240,12 @@ public class ReservasFragment extends Fragment {
                     public void onResponse(String response) {
                         // Manejar la respuesta del servidor (por ejemplo, confirmar la cancelación)
                         Toast.makeText(requireContext(), "Reserva cancelada exitosamente", Toast.LENGTH_SHORT).show();
-                        txtInfoReserva.setText("Aun no has Reservado una Mesa");
+                        txtInfoReserva.setText("Aún no has Reservado una Mesa");
+                        reservas.setVisibility(View.VISIBLE);
+                        txtNuevaReserva.setVisibility(View.VISIBLE);
+                        txtTituloInfoReserva.setVisibility(View.INVISIBLE);
+                        btn_editarReserva.setVisibility(View.INVISIBLE);
+                        btn_eliminarReserva.setVisibility(View.INVISIBLE);
                     }
                 }, new Response.ErrorListener() { // Listener que maneja errores en la petición
             @Override

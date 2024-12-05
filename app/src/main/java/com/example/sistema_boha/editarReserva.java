@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -172,6 +173,7 @@ public class editarReserva extends AppCompatActivity {
                 calendarView.setDate(milisegundos, true, true); // Los últimos dos parámetros son para animación
             }
 
+            fechaSeleccionada = reserva.getString("fecha");
             // Obtener la hora del objeto JSON
             horaSeleccionada = reserva.getString("hora");
             // Asignar la hora recibida como texto al botón
@@ -196,9 +198,34 @@ public class editarReserva extends AppCompatActivity {
         String cantidadPersonas = editTextCantidad.getText().toString();
         String motivo = editTextMotivo.getText().toString();
 
+        //  Controles de los Campos
+
         // Verificamos que no haya campos vacíos
         if (cantidadPersonas.isEmpty() || motivo.isEmpty() || fechaSeleccionada == null || horaSeleccionada == null) {
             Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Verificación de cantidad de personas
+        if (Integer.parseInt(cantidadPersonas) > 15) {
+            Toast.makeText(this, "Se pueden Reservar como máximo 15 Sillas", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Verificación de fecha
+        Calendar fechaActual = Calendar.getInstance();
+        fechaActual.add(Calendar.DAY_OF_YEAR, 1); // Añadir un día para obtener el día siguiente
+        Calendar fechaSeleccionadaCal = Calendar.getInstance();
+        String[] partesFecha = fechaSeleccionada.split("-");
+        fechaSeleccionadaCal.set(Integer.parseInt(partesFecha[0]), Integer.parseInt(partesFecha[1]) - 1, Integer.parseInt(partesFecha[2]));
+        if (fechaSeleccionadaCal.before(fechaActual)) {
+            Toast.makeText(this, "Fecha Incorrecta", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // Verificación de hora
+        String[] partesHora = horaSeleccionada.split(":");
+        int hora = Integer.parseInt(partesHora[0]);
+        int minuto = Integer.parseInt(partesHora[1]);
+        if (hora < 8 || (hora >= 23 && minuto > 0)) {
+            Toast.makeText(this, "La hora debe estar entre las 08:00 y las 23:00", Toast.LENGTH_SHORT).show();
             return;
         }
 
