@@ -21,9 +21,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sistema_boha.conexion.conexion;
+import com.example.sistema_boha.controladores.CryptoUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import javax.crypto.SecretKey;
 
 public class Login extends AppCompatActivity {
 
@@ -33,6 +36,7 @@ public class Login extends AppCompatActivity {
 
     // Dirección IP del servidor
     String direccion = conexion.direccion;
+    private SecretKey secretKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +104,25 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<JSONObject>() { // Listener que maneja la respuesta exitosa
             @Override
             public void onResponse(JSONObject jsonObject) {
+                String ClaveBD;
+                //desencriptar la clave
+                try {
+                    // Generar la clave secreta
+                    secretKey = CryptoUtils.generateKey();
+
+                    // Desencriptar el valor
+                    String encryptedText = jsonObject.getString("clave");
+                    String decryptedText = CryptoUtils.decrypt(encryptedText, secretKey);
+                    Log.e("Clave Desencriptada", "Texto Desencriptado: " + decryptedText);
+                    ClaveBD = decryptedText;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ClaveBD = "";
+                }
+
                 try {
                     // Si las credenciales coinciden, navegar a la actividad principal
-                    if(jsonObject.getString("email").equals(email) && jsonObject.getString("clave").equals(clave)){
+                    if(jsonObject.getString("email").equals(email) && ClaveBD.equals(clave)){
                         Intent intent = new Intent(Login.this, InicioActivity.class);
                         guardarDatosUsuario(jsonObject); // Guardar los datos del usuario en SharedPreferences
                         startActivity(intent);

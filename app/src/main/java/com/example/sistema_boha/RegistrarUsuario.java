@@ -22,11 +22,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sistema_boha.conexion.conexion;
+import com.example.sistema_boha.controladores.CryptoUtils;
 import com.example.sistema_boha.entidades.Cliente;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.crypto.SecretKey;
 
 public class RegistrarUsuario extends AppCompatActivity {
 
@@ -35,6 +38,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     Button botonRegistrar;
     String direccionip = conexion.direccion;
     Cliente cliente = new Cliente();
+    private SecretKey secretKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +123,24 @@ public class RegistrarUsuario extends AppCompatActivity {
         cliente.setDireccion(direccion.getText().toString());
         cliente.setEmail(correo.getText().toString());
         cliente.setTelefono(numero.getText().toString());
-        cliente.setClave(clave.getText().toString());
+        //encriptar la clave
+        try {
+            // Generar la clave secreta
+            secretKey = CryptoUtils.generateKey();
+
+            // Encriptar un valor
+            String originalText = clave.getText().toString();
+            String encryptedText = CryptoUtils.encrypt(originalText, secretKey);
+            Log.e("Clave Encriptada", "Texto Encriptado: " + encryptedText);
+            cliente.setClave(encryptedText);
+
+            // Desencriptar el valor
+//            String decryptedText = CryptoUtils.decrypt(encryptedText, secretKey);
+//            Log.e("Clave Desencriptada", "Texto Desencriptado: " + decryptedText);
+        } catch (Exception e) {
+            e.printStackTrace();
+            cliente.setClave(clave.getText().toString());
+        }
         if(cliente.clienteValido()){
             valido = true; // Los datos son válidos, proceder con la lógica de registro
         }else {

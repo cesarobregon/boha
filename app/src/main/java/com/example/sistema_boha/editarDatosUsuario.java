@@ -29,10 +29,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sistema_boha.conexion.conexion;
+import com.example.sistema_boha.controladores.CryptoUtils;
 import com.example.sistema_boha.entidades.Cliente;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.crypto.SecretKey;
 
 public class editarDatosUsuario extends AppCompatActivity {
 
@@ -40,6 +43,7 @@ public class editarDatosUsuario extends AppCompatActivity {
     private Toolbar toolbar;
     String direccion = conexion.direccion;
     int id;
+    private SecretKey secretKey;
 
     Cliente cliente = new Cliente();
     EditText txtNombre, txtApellido, txtEmail, txtDireccion, txtTelefono, txtClave;
@@ -110,13 +114,28 @@ public class editarDatosUsuario extends AppCompatActivity {
         String telefono = preferences.getString("telefono", "telefono no disponible");
         String clave = preferences.getString("clave", "Clave no disponible");
 
+        String ClaveDesencriptada;
+        //desencriptar la clave
+        try {
+            // Generar la clave secreta
+            secretKey = CryptoUtils.generateKey();
+
+            // Desencriptar el valor
+            String decryptedText = CryptoUtils.decrypt(clave, secretKey);
+            Log.e("Clave Desencriptada", "Texto Desencriptado: " + decryptedText);
+            ClaveDesencriptada = decryptedText;
+        } catch (Exception e) {
+            e.printStackTrace();
+            ClaveDesencriptada = "";
+        }
+
         // Mostrar los datos en los TextViews
         txtNombre.setText(nombre);
         txtApellido.setText(apellido);
         txtEmail.setText(email);
         txtDireccion.setText(direccion);
         txtTelefono.setText(telefono);
-        txtClave.setText(clave);
+        txtClave.setText(ClaveDesencriptada);
 
         //solucionar error
         //java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
@@ -164,7 +183,22 @@ public class editarDatosUsuario extends AppCompatActivity {
         cliente.setDireccion(txtDireccion.getText().toString());
         cliente.setEmail(txtEmail.getText().toString());
         cliente.setTelefono(txtTelefono.getText().toString());
-        cliente.setClave(txtClave.getText().toString());
+
+        //encriptar la clave
+        try {
+            // Generar la clave secreta
+            secretKey = CryptoUtils.generateKey();
+
+            // Encriptar un valor
+            String originalText = txtClave.getText().toString();
+            String encryptedText = CryptoUtils.encrypt(originalText, secretKey);
+            Log.e("Clave Encriptada", "Texto Encriptado: " + encryptedText);
+            cliente.setClave(encryptedText);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            cliente.setClave(txtClave.getText().toString());
+        }
         if(cliente.clienteValido()){
             valido = true; // Los datos son válidos, proceder con la lógica de registro
         }else {
