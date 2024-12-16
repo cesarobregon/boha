@@ -1,13 +1,15 @@
 package com.example.sistema_boha.controladores;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import android.util.Base64;
-import java.security.NoSuchAlgorithmException;
 
-public class CryptoUtils {
+import android.annotation.SuppressLint;
+import android.util.Base64;
+
+import java.nio.charset.StandardCharsets;
+
+public class EncriptarDesencriptar {
 
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES";
@@ -22,19 +24,19 @@ public class CryptoUtils {
     }
 
     // Método para encriptar el texto
-    public static String encrypt(String value, SecretKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+    public static String encriptar(String value, SecretKey key) throws Exception {
+        @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance(TRANSFORMATION);
         cipher.init(Cipher.ENCRYPT_MODE, key);
-        byte[] encryptedValue = cipher.doFinal(value.getBytes("UTF-8"));
+        byte[] encryptedValue = cipher.doFinal(value.getBytes(StandardCharsets.UTF_8));
         return Base64.encodeToString(encryptedValue, Base64.DEFAULT);
     }
 
     // Método para desencriptar el texto
-    public static String decrypt(String value, SecretKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+    public static String desencriptar(String value, SecretKey key) throws Exception {
+        @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance(TRANSFORMATION);
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] decryptedValue = cipher.doFinal(Base64.decode(value, Base64.DEFAULT));
-        return new String(decryptedValue, "UTF-8");
+        return new String(decryptedValue, StandardCharsets.UTF_8);
     }
 }
 

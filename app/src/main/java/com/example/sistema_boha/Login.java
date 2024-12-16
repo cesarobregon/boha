@@ -21,7 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sistema_boha.conexion.conexion;
-import com.example.sistema_boha.controladores.CryptoUtils;
+import com.example.sistema_boha.controladores.EncriptarDesencriptar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -110,11 +110,11 @@ public class Login extends AppCompatActivity {
 
                 try {
                     // Obtener la clave fija
-                    SecretKey secretKey = CryptoUtils.getFixedKey();
+                    SecretKey secretKey = EncriptarDesencriptar.getFixedKey();
 
                     // Desencriptar el valor
                     String encryptedText = jsonObject.getString("clave");
-                    String decryptedText = CryptoUtils.decrypt(encryptedText, secretKey);
+                    String decryptedText = EncriptarDesencriptar.desencriptar(encryptedText, secretKey);
                     Log.e("Clave Desencriptada", "Texto Desencriptado: " + decryptedText);
                     ClaveBD = decryptedText;
                 } catch (Exception e) {

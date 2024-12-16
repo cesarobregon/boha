@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="Cambiar IP"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/btnInicio_"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

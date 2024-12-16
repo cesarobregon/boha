@@ -22,7 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sistema_boha.conexion.conexion;
-import com.example.sistema_boha.controladores.CryptoUtils;
+import com.example.sistema_boha.controladores.EncriptarDesencriptar;
 import com.example.sistema_boha.entidades.Cliente;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,11 +131,11 @@ public class RegistrarUsuario extends AppCompatActivity {
             //encriptar la clave
             try {
                 // Obtener la clave fija
-                SecretKey secretKey = CryptoUtils.getFixedKey();
+                SecretKey secretKey = EncriptarDesencriptar.getFixedKey();
 
                 // Encriptar un valor
                 String originalText = clave.getText().toString();
-                String encryptedText = CryptoUtils.encrypt(originalText, secretKey);
+                String encryptedText = EncriptarDesencriptar.encriptar(originalText, secretKey);
                 Log.e("Clave Encriptada", "Texto Encriptado: " + encryptedText);
                 cliente.setClave(encryptedText);
             } catch (Exception e) {

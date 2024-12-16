@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -53,6 +54,8 @@ public class PagoActivity extends AppCompatActivity {
     Intent intent;
     Pedido pedido;
     public List<Producto> productosEnCarrito;
+
+    String url = "https://developers.android.com";
 
     Button confirmarPedido;
     TextView txtInfoPedidos;
@@ -154,9 +157,23 @@ public class PagoActivity extends AppCompatActivity {
     private void confirmarpedido(){
         pedido.setTipoEntrega(modoEntregaSeleccionado);
         if (Objects.equals(metodoPagoSeleccionado, "Transferencia")){
+
+
+            // Agrega credenciales
+//            MercadoPagoConfig.setAccessToken("PROD_ACCESS_TOKEN");
+//
+//            //abrir mercado pago
+//            CustomTabsIntent intent = new CustomTabsIntent.Builder()
+//                    .build();
+//            intent.launchUrl(this, Uri.parse(url));
+
+
+
             pedido.setId_metodo(3);
             pedido.setFechaPago(obtenerFechaActual());
             pedido.setEstadoPago("Pagado");
+
+
         }else {
             pedido.setId_metodo(4);
             pedido.setFechaPago(obtenerFechaActual());
@@ -191,6 +208,7 @@ public class PagoActivity extends AppCompatActivity {
                                 Toast.makeText(PagoActivity.this, "Pedido registrado exitosamente", Toast.LENGTH_SHORT).show();
                                 CarritoManager.getInstance().vaciarCarrito();//vaciamos el carrito
                                 finish();
+                                startActivity(new Intent(PagoActivity.this, InicioActivity.class));
                             } else {
                                 Toast.makeText(PagoActivity.this, "Error al registrar el pedido", Toast.LENGTH_SHORT).show();
                                 Log.e("Error al Registrar", jsonObject.getString("message"));

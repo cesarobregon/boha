@@ -29,7 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sistema_boha.conexion.conexion;
-import com.example.sistema_boha.controladores.CryptoUtils;
+import com.example.sistema_boha.controladores.EncriptarDesencriptar;
 import com.example.sistema_boha.entidades.Cliente;
 
 import java.util.HashMap;
@@ -118,9 +118,9 @@ public class editarDatosUsuario extends AppCompatActivity {
         //desencriptar la clave
         try {
             // Obtener la clave fija
-            SecretKey secretKey = CryptoUtils.getFixedKey();
+            SecretKey secretKey = EncriptarDesencriptar.getFixedKey();
             // Desencriptar el valor
-            String decryptedText = CryptoUtils.decrypt(clave, secretKey);
+            String decryptedText = EncriptarDesencriptar.desencriptar(clave, secretKey);
             Log.e("Clave Desencriptada", "Texto Desencriptado: " + decryptedText);
             ClaveDesencriptada = decryptedText;
         } catch (Exception e) {
@@ -184,10 +184,10 @@ public class editarDatosUsuario extends AppCompatActivity {
             //encriptar la clave
             try {
                 // Obtener la clave fija
-                SecretKey secretKey = CryptoUtils.getFixedKey();
+                SecretKey secretKey = EncriptarDesencriptar.getFixedKey();
                 // Encriptar un valor
                 String originalText = txtClave.getText().toString();
-                String encryptedText = CryptoUtils.encrypt(originalText, secretKey);
+                String encryptedText = EncriptarDesencriptar.encriptar(originalText, secretKey);
                 Log.e("Clave Encriptada", "Texto Encriptado: " + encryptedText);
                 cliente.setClave(encryptedText);
             } catch (Exception e) {

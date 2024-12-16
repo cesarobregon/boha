@@ -1,7 +1,5 @@
 package com.example.sistema_boha.entidades;
 
-import java.util.Date;
-
 public class Pago {
     private int id_pago;
     private String uuid_pedido;
