@@ -43,11 +43,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
 
     private List<Pedido> pedidos;
     public List<Producto> productosEnCarrito;
-    String estadoPedido = "PENDIENTE";
-
     String direccion = conexion.direccion;
-    Intent intent;
-    Context context;
 
 
     // Constructor del adaptador
@@ -72,6 +68,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         // Configurar datos del pedido
         holder.txtFechaPedido.setText("Fecha: " + pedido.getFechaPedido());
         holder.txtMontoTotal.setText("Monto: $" + pedido.getMontoTotal());
+        holder.txtEstado.setText("Estado: " + pedido.getEstadoPedido());
 
         //si el tipo de entrega es distinto a "consumir en el local", se cambia el texto y color del boton
         if(!Objects.equals(pedido.getTipoEntrega(), "Consumir en el Local")){
@@ -118,17 +115,23 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         return pedidos.size();
     }
 
+    // Método para limpiar la lista
+    public void clearItems() {
+        pedidos.clear();
+        notifyDataSetChanged(); // Actualiza el RecyclerView
+    }
+
     public static class PedidoViewHolder extends RecyclerView.ViewHolder {
-        TextView txtFechaPedido, txtMontoTotal;
+        TextView txtFechaPedido, txtMontoTotal, txtEstado;
         Button btnVerCarrito, btnAccionPedido;
 
         public PedidoViewHolder(@NonNull View itemView) {
             super(itemView);
             txtFechaPedido = itemView.findViewById(R.id.txtFechaPedido);
             txtMontoTotal = itemView.findViewById(R.id.txtMontoTotal);
+            txtEstado = itemView.findViewById(R.id.txtEstadoPedido);
             btnVerCarrito = itemView.findViewById(R.id.btnVerCarrito);
             btnAccionPedido = itemView.findViewById(R.id.btnAccionPedido);
-
 
         }
     }
@@ -243,6 +246,51 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
             }
         };
         // Añadir la solicitud a la RequestQueue
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public void verificarEstadoPedido(Context context, String uuidPedido) {
+        // URL de tu API
+        String url = "https://" + direccion + "/tu_api/verificarEstadoPedido.php?uuid_pedido=" + uuidPedido;
+
+        // Crear el Response Listener para manejar la respuesta exitosa
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    // Convertir la respuesta a un objeto JSON
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    // Verificar si tiene el campo "estado"
+                    if (jsonObject.has("estado")) {
+                        String estado = jsonObject.getString("estado");
+                        // Mostrar el estado del pedido
+                        Toast.makeText(context, "Estado: " + estado, Toast.LENGTH_SHORT).show();
+                    } else if (jsonObject.has("mensaje")) {
+                        String mensaje = jsonObject.getString("mensaje");
+                        Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Error al procesar la respuesta", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
+        // Crear el Error Listener para manejar errores de la solicitud
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Manejar errores en la solicitud
+                Toast.makeText(context, "Error en la conexión: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        // Crear una solicitud de tipo StringRequest
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener, errorListener);
+
+        // Agregar la solicitud a la cola
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }

@@ -29,6 +29,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtFechaPedido" />
 
+    <!-- Monto total -->
+    <TextView
+        android:id="@+id/txtEstadoPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estado"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtMontoTotal" />
+
     <!-- Botón para ver los productos del carrito -->
     <Button
         android:id="@+id/btnVerCarrito"

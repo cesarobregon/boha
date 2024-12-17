@@ -104,7 +104,7 @@ public class RegistrarUsuario extends AppCompatActivity {
                 parametros.put("apellido", cliente.getApellido());
                 parametros.put("direccion", cliente.getDireccion());
                 parametros.put("email", cliente.getEmail());
-                parametros.put("telefono", cliente.getTelefono());
+                parametros.put("telefono", "+54" + cliente.getTelefono());
                 parametros.put("clave", cliente.getClave());
                 return parametros;
             }

@@ -72,6 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnCancelarPedido"
             app:layout_constraintTop_toBottomOf="@+id/txtInfoPedido" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Sección inferior: Listado de pedidos -->
