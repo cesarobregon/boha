@@ -157,23 +157,9 @@ public class PagoActivity extends AppCompatActivity {
     private void confirmarpedido(){
         pedido.setTipoEntrega(modoEntregaSeleccionado);
         if (Objects.equals(metodoPagoSeleccionado, "Transferencia")){
-
-
-            // Agrega credenciales
-//            MercadoPagoConfig.setAccessToken("PROD_ACCESS_TOKEN");
-//
-//            //abrir mercado pago
-//            CustomTabsIntent intent = new CustomTabsIntent.Builder()
-//                    .build();
-//            intent.launchUrl(this, Uri.parse(url));
-
-
-
             pedido.setId_metodo(3);
             pedido.setFechaPago(obtenerFechaActual());
             pedido.setEstadoPago("Pagado");
-
-
         }else {
             pedido.setId_metodo(4);
             pedido.setFechaPago(obtenerFechaActual());
@@ -181,9 +167,11 @@ public class PagoActivity extends AppCompatActivity {
         }
         pedido.setMontoTotal(calcularTotalCarrito());
         pedido.setProductos(productosEnCarrito);
-
-        registrarPedido(pedido);
-
+        if (Objects.equals(metodoPagoSeleccionado, "Transferencia")){
+            Toast.makeText(PagoActivity.this, "Metodo de pago en desarrollo", Toast.LENGTH_SHORT).show();
+        }else {
+            registrarPedido(pedido);
+        }
     }
     private void registrarPedido(Pedido pedido) {
         // URL base del API PHP donde se realiza la solicitud POST
